@@ -18,7 +18,9 @@ from sklearn.model_selection import train_test_split
 
 problem_title = 'Bank Marketing classification'
 
-
+_prediction_label_names = [0, 1]
+prediction_type = rw.prediction_types.make_multiclass(
+    label_names=_prediction_label_names)
 
 # -----------------------------------------------------------------------------
 # Training / testing data reader
