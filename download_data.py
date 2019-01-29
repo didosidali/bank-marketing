@@ -1,32 +1,34 @@
 from __future__ import print_function
 
 import os
-import zipfile
 
 try:
     from urllib.request import urlretrieve
 except ImportError:
     from urllib import urlretrieve
 
-URLBASE = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00222/{}'
-filename = 'bank.zip'
 
+DATA = [('data_train.csv', 'https://drive.google.com/uc?export=download&id=1OycuGIuFTvD8BVdLC_aaN7HQm6-76ctA'),
+	('data_test.csv', 'https://drive.google.com/uc?export=download&id=17GKILvg8jlYgSG46-dbaFpZoiueuo3Oz')]
+
+LABEL = [('label_train.npy', 'https://drive.google.com/uc?export=download&id=1PxJJQabqQf55PvHF1FdsxE5uWl2lcUQJ'),
+         ('label_test.npy', 'https://drive.google.com/uc?export=download&id=1vZyW2XFXFnIsl_0r_TqfzT2-2xaX3aSm')]
 
 def main(output_dir='data'):
 
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
-    url =  URLBASE.format(filename)
-    output_file = os.path.join(output_dir, filename)
-    if not os.path.exists(output_file):
-        print("Downloading from {} ...".format(url))
+
+    for filename, url in DATA + LABEL:
+        output_file = os.path.join(output_dir, filename)
+	
+        if os.path.exists(output_file):
+            print('{} already exists'.format(output_file))
+            continue
+
+        print('Downloading from {} ...'.format(url))
         urlretrieve(url, filename=output_file)
-        print("=> File saved as {}".format(output_file))
-        print("Download finished. Extracting files.")
-        zipfile.ZipFile(file=output_file, mode="r").extractall(output_dir)
-        print("Done.")
-    else:
-        print("Data has apparently already been downloaded and unpacked.")
+        print('=> File saved as {}'.format(output_file))
 
 
 if __name__ == '__main__':
