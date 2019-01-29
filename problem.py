@@ -38,7 +38,9 @@ def get_data(path='data',filename='bank-full.csv'):
     X = data.drop('y', axis=1)
     X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.2, random_state=42)
     X_train.reset_index(inplace=True)
+    X_train.drop(columns=['index'], inplace=True)
     X_test.reset_index(inplace=True)
+    X_test.drop(columns=['index'], inplace=True)
     return (X_train, X_test, y_train, y_test)
 
 
