@@ -131,7 +131,7 @@ def get_cv(X, y):
 def _read_data(path, type_):
     fname = 'data_{}.csv'.format(type_)
     fp = os.path.join(path, 'data', fname)
-    data = pd.read_csv(fp, sep=",")
+    data = pd.read_csv(fp, sep=";")
     fname = 'labels_{}.npy'.format(type_)
     fp = os.path.join(path, 'data', fname)
     labels = np.load(fp)
