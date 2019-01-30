@@ -1,4 +1,3 @@
-
 from __future__ import division, print_function
 import os
 import datetime
@@ -99,21 +98,35 @@ class liftmetric(ClassifierBaseScoreType):
         for i in range(len(y_pred)):
             if y_pred[i] == 0 and y_true[i] != y_pred[i]:
                 FN += 1
-        return (TP/(TP+FP))/((TP+FN)/(TP+TN+FP+FN))
-
+        return (TN/(TN+FP))/((TN+FN)/(TP+TN+FP+FN))
 score_types = [
     liftmetric(),
     rw.score_types.ROCAUC(name='roc_auc', precision=2),
     rw.score_types.NegativeLogLikelihood(name='nll', precision=2),
-    w_FScore(),
+    rw.score_types.F1Above(name='f1_above', precision=2)
 ]
 
 #-----------------------------------------------------------------------
 
 def get_cv(X, y):
-    """Returns stratified randomized folds."""
-    cv = StratifiedShuffleSplit(n_splits=10, test_size=0.25, random_state=57)
-    return cv.split(X,y)
+    # using 5 folds as default
+    k = 5
+    # up to 10 fold cross-validation based on 5 splits, using two parts for
+    # testing in each fold
+    n_splits = 5
+    cv = KFold(n_splits=n_splits)
+    splits = list(cv.split(X, y))
+    # 5 folds, each point is in test set 4x
+    # set k to a lower number if you want less folds
+    pattern = [
+        ([2, 3, 4], [0, 1]), ([0, 1, 4], [2, 3]), ([0, 2, 3], [1, 4]),
+        ([0, 1, 3], [2, 4]), ([1, 2, 4], [0, 3]), ([0, 1, 2], [3, 4]),
+        ([0, 2, 4], [1, 3]), ([1, 2, 3], [0, 4]), ([0, 3, 4], [1, 2]),
+        ([1, 3, 4], [0, 2])
+    ]
+    for ps in pattern[:k]:
+        yield (np.hstack([splits[p][1] for p in ps[0]]),
+               np.hstack([splits[p][1] for p in ps[1]]))
 
 def _read_data(path, type_):
     fname = 'data_{}.csv'.format(type_)
@@ -121,7 +134,7 @@ def _read_data(path, type_):
     data = pd.read_csv(fp, sep=",")
     fname = 'labels_{}.npy'.format(type_)
     fp = os.path.join(path, 'data', fname)
-    labels = pd.DataFrame(np.load(fp),columns=["label"])
+    labels = np.load(fp)
     return data, labels
 
 def get_train_data(path='.'):
