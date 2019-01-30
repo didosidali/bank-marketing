@@ -9,14 +9,14 @@ except ImportError:
 
 URLBASE = 'https://dl.dropboxusercontent.com/s/{}'
 DATA_ROUTS = [
-    'zotsgf22f0xr4y0/data-test.csv?dl=0', 'c33xgr93c0hc6e4/data-train.csv?dl=0']
+    '0jobil7exo46qt9/data_test.csv?dl=1', '735rp4zlxhencju/data_train.csv?dl=1']
 LABELS_ROUTS = [
-    'bcl7p7bufqjcwvw/label_test.npy?dl=0', 'mdor7eyqo7l3iy4/label_train.npy?dl=0']
+    'jerexe2cu2efqbq/labels_test.npy?dl=1', 'j5g7k19lch05rx9/labels_train.npy?dl=1']
 
 DATA_NAMES = [
-    'data-test.csv', 'data-train.csv']
+    'data_test.csv', 'data_train.csv']
 LABELS_NAMES = [
-    'label_test.npy', 'label_train.npy']
+    'labels_test.npy', 'labels_train.npy']
 
 def main(output_dir='data'):
     file_routs = DATA_ROUTS + LABELS_ROUTS

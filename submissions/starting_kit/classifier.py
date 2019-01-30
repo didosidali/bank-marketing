@@ -11,9 +11,9 @@ class Classifier(BaseEstimator):
         self.model = make_pipeline(StandardScaler(), LogisticRegression())
 
     def fit(self, X, y):
-        return
+        # return
         self.model.fit(X, y)
 
     def predict_proba(self, X):
-        return np.zeros(len(X)) 
+        # return np.zeros(len(X)) 
         return self.model.predict_proba(X)

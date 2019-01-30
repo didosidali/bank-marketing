@@ -116,10 +116,10 @@ def get_cv(X, y):
     return cv.split(X,y)
 
 def _read_data(path, type_):
-    fname = 'data-{}.csv'.format(type_)
+    fname = 'data_{}.csv'.format(type_)
     fp = os.path.join(path, 'data', fname)
-    data = pd.read_csv(fp, sep=";")
-    fname = 'label_{}.npy'.format(type_)
+    data = pd.read_csv(fp, sep=",")
+    fname = 'labels_{}.npy'.format(type_)
     fp = os.path.join(path, 'data', fname)
     labels = pd.DataFrame(np.load(fp),columns=["label"])
     return data, labels
