@@ -121,7 +121,7 @@ def _read_data(path, type_):
     data = pd.read_csv(fp, sep=";")
     fname = 'label_{}.npy'.format(type_)
     fp = os.path.join(path, 'data', fname)
-    labels = np.load(fp)
+    labels = pd.DataFrame(np.load(fp),columns=["label"])
     return data, labels
 
 def get_train_data(path='.'):
