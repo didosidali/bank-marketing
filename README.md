@@ -12,3 +12,31 @@ likely to be satisfied by the product/service. This marketing technique has beco
 Among others, financial instituions rely on targeted marketing to promote their services and increase their sales. In particular, banks have done this effectively to prospect for deposits. Term deposits, also known as bonds, refer to savings accounts that pay a fixed rate of interest (often better than just opening deposit account) until a given maturity date. Such funds generally cannot be withdrawn prior to maturity without paying a penalty. Banks usually try to leverage the data of their clients or other instituions' clients as well as third-party data in the hope of identiying the ones that are worthy to target, i.e. are likely to subscribe a term deposit, in their marketing campaigns. 
 
 In this challenge, we to identify the customers that are likely to subscribe a term deposit based on data provided by a  Portuguese banking institution.
+
+#### Set up
+
+Open a terminal and
+
+1. install the `ramp-workflow` library (if not already done)
+  ```
+  $ pip install git+https://github.com/paris-saclay-cds/ramp-workflow.git
+  ```
+  
+2. Follow the ramp-kits instructions from the [wiki](https://github.com/paris-saclay-cds/ramp-workflow/wiki/Getting-started-with-a-ramp-kit)
+
+#### Local notebook
+
+Get started on this RAMP with the [dedicated notebook](solar_wind_starting_kit.ipynb).
+
+To test the starting-kit, run
+
+
+```
+ramp_test_submission --quick-test
+```
+
+
+#### Help
+Go to the `ramp-workflow` [wiki](https://github.com/paris-saclay-cds/ramp-workflow/wiki) for more help on the [RAMP](http:www.ramp.studio) ecosystem.
+
+
